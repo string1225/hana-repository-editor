@@ -11,16 +11,71 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:hana.PrepareProject",
+        "workspaceContains:**/.xsaccess",
+        "workspaceContains:**/.xsapp",
+        "workspaceContains:**/.xsprivileges"
     ],
     "main": "./out/extension",
     "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "HANA Connection",
+            "properties": {
+                "hana.ip": {
+                    "type": "string",
+                    "default": "127.0.0.1",
+                    "description": "HANA IP Address"
+                },
+                "hana.instance": {
+                    "type": "string",
+                    "default": "00",
+                    "description": "HANA Instance No"
+                },
+                "hana.username":{
+                    "type":"string",
+                    "default":"SYSTEM",
+                    "description": "HANA User Name"
+                },
+                "hana.password":{
+                    "type":"string",
+                    "default":"123456",
+                    "description": "HANA User Password"
+                }
+            }
+        },
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "hana.PrepareProject",
+                "title": "Prepare Project",
+                "category": "HANA"
+            },{
+                "command": "hana.Submit",
+                "title": "Submit to HANA",
+                "category": "HANA"
+            },{
+                "command": "hana.Retrieve",
+                "title": "Retrieve from HANA",
+                "category": "HANA"
             }
-        ]
+        ],
+        "menus":{
+            "explorer/context": [
+                {
+                    "command": "hana.PrepareProject",
+                    "group": "7_modification",
+                    "when":"explorerResourceIsFolder"
+                },
+                {
+                    "command": "hana.Submit",
+                    "group": "7_modification"
+                },
+                {
+                    "command": "hana.Retrieve",
+                    "group": "7_modification"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
