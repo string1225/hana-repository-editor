@@ -11,6 +11,11 @@ const enum Protocal {
 }
 
 export default class HanaConnector {
+    static tokenApi = '/sap/hana/xs/dt/base/server/csrf.xsjs';
+    static infoApi = '/sap/hana/xs/dt/base/info';
+    static fileApi = '/sap/hana/xs/dt/base/file';
+    static transferApi = '/sap/hana/xs/dt/base/xfer/import';
+
     private _protocol: Protocal;
     private _hostname: string;
     private _port: string;
