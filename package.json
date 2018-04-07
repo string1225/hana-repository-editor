@@ -11,10 +11,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:hana.PrepareProject",
-        "workspaceContains:**/.xsaccess",
-        "workspaceContains:**/.xsapp",
-        "workspaceContains:**/.xsprivileges"
+        "onCommand:hana.Connect"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -22,49 +19,60 @@
             "type": "object",
             "title": "HANA Connection",
             "properties": {
-                "hana.ip": {
+                "hana.hostname": {
                     "type": "string",
                     "default": "127.0.0.1",
-                    "description": "HANA IP Address"
+                    "description": "HANA Host Name"
                 },
-                "hana.instance": {
+                "hana.port": {
                     "type": "string",
-                    "default": "00",
-                    "description": "HANA Instance No"
+                    "default": "8000",
+                    "description": "HANA Port"
                 },
-                "hana.username":{
-                    "type":"string",
-                    "default":"SYSTEM",
+                "hana.username": {
+                    "type": "string",
+                    "default": "SYSTEM",
                     "description": "HANA User Name"
                 },
-                "hana.password":{
-                    "type":"string",
-                    "default":"123456",
-                    "description": "HANA User Password"
+                "hana.password": {
+                    "type": "string",
+                    "default": "123456",
+                    "description": "HANA Password"
                 }
             }
         },
         "commands": [
             {
-                "command": "hana.PrepareProject",
-                "title": "Prepare Project",
+                "command": "hana.Connect",
+                "title": "Connect to HANA",
                 "category": "HANA"
-            },{
+            },
+            {
+                "command": "hana.InitProject",
+                "title": "Init Project",
+                "category": "HANA"
+            },
+            {
                 "command": "hana.Submit",
                 "title": "Submit to HANA",
                 "category": "HANA"
-            },{
+            },
+            {
                 "command": "hana.Retrieve",
                 "title": "Retrieve from HANA",
                 "category": "HANA"
             }
         ],
-        "menus":{
+        "menus": {
             "explorer/context": [
                 {
-                    "command": "hana.PrepareProject",
+                    "command": "hana.Connect",
+                    "group": "7_modification"
+                },
+                {
+                    "command": "hana.InitProject",
                     "group": "7_modification",
-                    "when":"explorerResourceIsFolder"
+                    "when": "explorerResourceIsFolder"
                 },
                 {
                     "command": "hana.Submit",
